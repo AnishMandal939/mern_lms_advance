@@ -1,0 +1,31 @@
+**/server/node_modules
+**/server/.env
+**/server/.env.example
+
+**/client/node_modules
+**/client/.env
+**/client/.env.example
+
+**/admin/node_modules
+**/admin/.env
+**/admin/.env.example
+
+**/node_modules
+
+# Ignore the build folder
+**/build
+
+# Ignore the coverage folder
+**/coverage
+
+# Ignore the .next folder
+**/.next
+
+# Ignore the public folder
+**/public
+
+# Ignore the .DS_Store file
+**/.DS_Store
+
+# Ignore the .env file
+**/.env

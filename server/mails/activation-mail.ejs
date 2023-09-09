@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>60 seconds of code LMS Activation mail</title>
+    <style type="text/css">
+        /* base */
+        body{
+            margin: 0;
+            padding: 0;
+            min-width: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #222222;
+            background-color: #fafafa;
+        }
+        a{
+            text-decoration: none;
+            color: #222222;
+        }
+        h1{
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.5;
+            margin: 0 0 15px 0;
+            text-align: center;
+            padding: 0;
+        }
+        p{
+            margin: 0 0 24px 0;
+            padding: 0;
+        }
+        table td{
+            vertical-align: top;
+        }
+        /* layout */
+        .email-wrapper{
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            /* padding: 0 24px; */
+        }
+        .email-header{
+            padding: 24px;
+            background-color: #ffffff;
+        }
+        .email-footer{
+            padding: 24px;
+            background-color: #f6f6f6;
+        }
+        /* buttons */
+        .button{
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 4px;
+            background-color: #222222;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-wrapper">
+        <div class="email-header">
+            <h1>Welcome to 60 seconds of code LMS</h1>
+        </div>
+        <div class="email-body">
+            <h2>Hi <%= user.name %>,</h2>
+            <p>Thank you for registering with us. Please click on the button below to activate your account.</p>
+            <!-- activation code -->
+            <p>Activation code: <%= activationCode %></p>
+            <p>
+                Please enter this code in the activation page to activate your account with in the next 5 minutes
+            </p>
+            <p>If you did not register with us, please ignore this email.</p>
+            <p>Thank you.</p>
+            <p>Regards,</p>
+            <p>60 seconds of code LMS</p>
+            <!-- <p><a href="http://localhost:3000/activate/<%= user._id %>" class="button">Activate Account</a></p> -->
+
+        </div>
+        <div class="email-footer">
+            <p>If you have any questions, please don't hesitate to contact us at 
+                <a href="mailto:anish.mandal@bitskraft.com">
+                    anish.mandal@bitskraft.com
+                </a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
