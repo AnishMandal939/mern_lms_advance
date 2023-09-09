@@ -48,4 +48,7 @@
     - update profile
     - delete profile
 
-TODO: routes - folder structure 2: 27:54
+SUCCESS: login / logout
+
+- password generator for access token m refreshToken
+https://www.lastpass.com/features/password-generator - to generate random password
