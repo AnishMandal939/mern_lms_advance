@@ -21,5 +21,11 @@
 - password generator for access token m refreshToken
 https://www.lastpass.com/features/password-generator - to generate random password
 
-TODO: protected Route | authorization - done
+SUCCESS: Generate New Token , get user, social authentication
 
+jtw token must be provided - means - your token expired - this should only be hitted when user is logged in
+this is like professional authentication system that fb,outlook, teams etc other sites uses to secure session logout
+
+- social auth will be handled from frontend
+
+TODO: update user info, password and avatar

@@ -41,7 +41,6 @@ const userSchema: Schema<IUser> = new Schema({
     },
     password: {
         type: String,
-        required: [true, "Please enter your password"],
         minlength: [6, "Your password must be longer than 6 characters"],
         select: false, // this will not return password in response
     },
@@ -83,12 +82,12 @@ userSchema.pre<IUser>("save", async function (next) {
 
 // sign access token - for authentication
 userSchema.methods.SignAccessToken = function (): string {
-    return jwt.sign({ id: this._id }, process.env.ACCESS_TOKEN || '');
+    return jwt.sign({ id: this._id }, process.env.ACCESS_TOKEN || '', { expiresIn: "5m" });
 }
 
 // sign refresh token - for authorization
 userSchema.methods.SignRefreshToken = function (): string {
-    return jwt.sign({ id: this._id }, process.env.REFRESH_TOKEN || '');
+    return jwt.sign({ id: this._id }, process.env.REFRESH_TOKEN || '', { expiresIn: "3d" });
 }
 
 
