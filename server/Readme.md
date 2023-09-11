@@ -28,4 +28,18 @@ this is like professional authentication system that fb,outlook, teams etc other
 
 - social auth will be handled from frontend
 
-TODO: update user info, password and avatar
+SUCCESS: update user info, password and avatar
+ - cloudinary - image hosting - 
+ base64 image  for cloudinary - 
+
+ ## authentication done - forgot password functionality left
+
+
+TODO:
+ ## COURSE - 2
+    - create course model : Design course database model ( schema )
+    - create course controller
+    - create course service
+    - create course route
+    - create course middleware
+    - create course validation
