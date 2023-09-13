@@ -39,10 +39,18 @@ TODO:
  ## COURSE - 2
     - create course model : Design course database model ( schema )
     - create course controller - create and edit course
-    SUCCESS: above
-    
-    TODO: - below
     - create course service
     - create course route
     - create course middleware
     - create course validation
+    SUCCESS: above
+
+    SUCCESS: - below
+    GET Single & All courses - without purchase
+     - since redis is serverless - we're maintaining data in cache (redis) - if once visited - then it will be stored in cache - so that next time it will be fetched from cache
+        - if not visited - then it will be fetched from database and stored in cache
+        - if visited - then it will be fetched from cache
+
+
+TODO:
+    - get course content, get user accessible all courses - only for valid user

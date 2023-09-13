@@ -4,6 +4,7 @@ import ErrorHandler from "../utils/ErrorHandler";
 import cloudinary from "cloudinary";
 import { createCourse } from "../services/course.service";
 import courseModel from "../models/course.model";
+import { redis } from "../utils/redis";
 
 
 // upload course
@@ -57,6 +58,65 @@ export const editCourse = CatchAsyncError(async (req: Request, res: Response, ne
             success: true,
             course
         });
+
+    } catch (error: any) {
+        return next(new ErrorHandler(error.message, 500));
+    }
+});
+
+// get single course - without purchasing | GET /api/v1/course/:id
+export const getSingleCourse = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        // receive data - for caching
+        const courseId = req.params.id;
+        const isCacheExist: any = await redis.get(courseId);
+        console.log("hitting redis", isCacheExist); // this will show you all data of course - if exist in cache
+
+
+        if (isCacheExist) {
+            const course = JSON.parse(isCacheExist);
+            res.status(200).json({
+                success: true,
+                course
+            });
+        } else {
+            // const course = await courseModel.findById(req.params.id); // this provides you all data of course , to secure data use select method
+            const course = await courseModel.findById(req.params.id).select("-courseData.videoUrl -courseData.suggestion -courseData.questions -courseData.links"); // this provides you all data of course , to secure data use select method
+            console.log("hitting mongodb", course); // this will show you all data of course
+            // caching to handle multiple request for same course - without purchasing
+            await redis.set(courseId, JSON.stringify(course)); // set cache
+            res.status(200).json({
+                success: true,
+                course
+            });
+        }
+
+
+    } catch (error: any) {
+        return next(new ErrorHandler(error.message, 500));
+    }
+});
+
+// get all courses - without purchase | GET /api/v1/courses
+export const getAllCourses = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const isCacheExist: any = await redis.get("allCourses");
+        if (isCacheExist) {
+            const courses = JSON.parse(isCacheExist);
+            console.log("hitting redis");
+            res.status(200).json({
+                success: true,
+                courses
+            });
+        } else {
+            const courses = await courseModel.find().select("-courseData.videoUrl -courseData.suggestion -courseData.questions -courseData.links"); // this provides you all data of course , to secure data use select method
+            console.log("hitting mongo");
+            await redis.set("allCourses", JSON.stringify(courses)); // set cache
+            res.status(200).json({
+                success: true,
+                courses
+            });
+        }
 
     } catch (error: any) {
         return next(new ErrorHandler(error.message, 500));
