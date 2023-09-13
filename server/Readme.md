@@ -38,7 +38,10 @@ SUCCESS: update user info, password and avatar
 TODO:
  ## COURSE - 2
     - create course model : Design course database model ( schema )
-    - create course controller
+    - create course controller - create and edit course
+    SUCCESS: above
+    
+    TODO: - below
     - create course service
     - create course route
     - create course middleware
