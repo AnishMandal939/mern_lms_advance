@@ -122,3 +122,28 @@ export const getAllCourses = CatchAsyncError(async (req: Request, res: Response,
         return next(new ErrorHandler(error.message, 500));
     }
 });
+
+// get course content -- only for valid user
+export const getCourseByUser = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        // get user courses
+        const userCourseList = req.user?.courses;
+        const courseId = req.params.id;
+        // check if user has purchased this course
+        const courseExist = userCourseList?.find((course: any) => course._id.toString() === courseId.toString());
+        if (!courseExist) {
+            return next(new ErrorHandler("You have not purchased/ eligible to this course", 400));
+        }
+        // get course
+        const course = await courseModel.findById(courseId);
+        // get course content
+        const content = course?.courseData;
+        res.status(200).json({
+            success: true,
+            course, content
+        });
+
+    } catch (error: any) {
+        return next(new ErrorHandler(error.message, 500));
+    }
+});

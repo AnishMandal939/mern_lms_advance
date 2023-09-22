@@ -52,5 +52,9 @@ TODO:
         - if visited - then it will be fetched from cache
 
 
-TODO:
+SUCCESS:
     - get course content, get user accessible all courses - only for valid user
+
+TODO:
+   - add questions to course array, and answers to question array
+   - add reviews in course
