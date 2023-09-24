@@ -55,6 +55,11 @@ TODO:
 SUCCESS:
     - get course content, get user accessible all courses - only for valid user
 
-TODO:
+SUCCESS:
    - add questions to course array, and answers to question array
    - add reviews in course
+
+   git remote set-url origin git@github.com:AnishMandal939/mern_lms_advance.git   - to push for personal github repo using ssh
+   git push origin branch_name - to push to github repo
+
+TODO: add review in course
