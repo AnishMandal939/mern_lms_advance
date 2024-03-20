@@ -64,5 +64,10 @@ SUCCESS:
 
 SUCCESS: add review and reply in course
 
+- SUCCESS: 
+   - design order model and notification model: done
+
 - TODO: 
-   - design order module and notification module
+   - create order controller - create and edit order
+      - create order done
+      - TODO: get and update notification status

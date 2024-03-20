@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>60 seconds of code LMS Activation mail</title>
+    <style type="text/css">
+        /* base */
+        body{
+            margin: 0;
+            padding: 0;
+            min-width: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #222222;
+            background-color: #fafafa;
+        }
+        .container{
+            max-width: 600px;
+            height: 100%;
+            margin: 0 auto;
+            padding: 20px;background-color: #4f5ef1;
+            box-shadow: 0 0 10px 0 #0000002f;
+            color: #ffffff;
+        }
+        .message{
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+            padding-top: 50px;
+        }
+        .message-sm{
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+            padding-top: 50px;
+        }
+        .message-sm > h1{
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .course-info{
+            padding: 20px 0;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px 0 #0000002f;
+            margin-top: 20px;
+            color: #000000af;
+            width: 100%;
+            border-radius: 5px;
+        }
+        .course-info > h4{
+            color: #23bd70;
+            font-size: 22px;
+            font-family: "Poppins", sans-serif;
+            font-weight: 500;
+            text-align: center;
+            padding: 0 !important;
+            margin-top: 0 !important;
+        }
+        .course-name{
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .purchase-info{
+            font-size: 16px;
+        }
+        .total{
+            font-size: 18px;
+            margin-top: 20px;
+            text-align: right;
+        }
+        .footer>p>a{
+            color: #ffffff;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .flex{
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #0000002f;
+            align-items: center;
+        }
+        .flex h4{
+            font-weight: 400;
+            margin-bottom: 5px;
+        }
+        .flex.lg{
+            width: 85%;
+            margin: auto;
+            border-bottom: none;
+        }
+        .first-td{
+            text-transform: uppercase;
+            color: #0000006c;
+            font-size: 16px;
+            padding: 5px 0px;
+            width: 1%;
+        }
+        .second-td{
+            font-weight: 500 !important;
+            color: #000000af;
+            font-size: 15px;
+        }
+        .title{
+            font-size: 16px !important;
+        }
+        table{
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td{
+            padding: 10px;
+            text-align: center;
+            width: 28.33%;
+        }
+        td.col-2
+        {
+            width: 100%;
+            text-align: left;
+            padding: 0;
+            margin: 0;
+        }
+        .m-auto{
+            width: 100%;
+            margin: auto;
+        }
+        .table-row{
+            width: 70%;
+            display: block;
+            margin: auto;
+            padding: 10px 0;
+        }
+        a{
+            text-decoration: none;
+            color: #222222;
+        }
+        table td{
+            vertical-align: top;
+        }
+        /* layout */
+        .email-wrapper{
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            /* padding: 0 24px; */
+        }
+        .email-header{
+            padding: 24px;
+            /* background-color: #ffffff; */
+            color: #f6f6f6;
+        }
+        .email-footer{
+            padding: 24px;
+            background-color: #f6f6f6;
+        }
+        /* buttons */
+        .button{
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 4px;
+            background-color: #222222;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="message-sm">
+            <h2>Your order is confirmed!,</h2>
+            <p>And we're just as excited as you are.</p>
+           
+        </div>
+        <br /> <br />
+        <div class="course-info">
+            <h4>Here's what you ordered:</h4>
+            <table style="border-bottom: 1px solid #0000002f;">
+                <tr>
+                    <td>Order #: <%= order._id %></td>
+                    <td>Order Date: <%= order.date %></td>
+                </tr>
+            </table>
+            <table style="width: 90%; margin: auto; display: block;">
+                <tr>
+                    <td class="first-td">Item</td>
+                    <td class="first-td">Qty</td>
+                    <td class="first-td">Cost</td>
+                </tr>
+            </table>
+            <table style="width: 90%; margin: auto; display: block;">
+                <tr>
+                    <td class="second-td"><%= order.name %></td>
+                    <td class="second-td">1</td>
+                    <td class="second-td">$<%= order.price %></td>
+                </tr>
+            </table>
+            <table class="table-row" style="border-top: 1px solid #00000029;">
+                <tr>
+                    <td class="col-2">Sub Total</td>
+                    <td class="col-2">$<%= order.price %></td>
+                </tr>
+            </table>
+            <table class="table-row" style="margin-top: -20px;">
+                <tr>
+                    <td class="col-2">Total:</td>
+                    <td class="col-2">$<%= order.price %></td>
+                </tr>
+            </table>
+        </div>
+        <div class="footer">
+            <p>For any queries, please contact us at 
+                <a href="mailto:anish.mandal@bitskraft.com">
+                    anish.mandal@bitskraft.com
+                </a>
+            </p>
+        </div>
+
+        <!-- <div class="email-footer">
+            <p>If you have any questions, please don't hesitate to contact us at 
+                <a href="mailto:anish.mandal@bitskraft.com">
+                    anish.mandal@bitskraft.com
+                </a>
+            </p>
+        </div> -->
+    </div>
+</body>
+</html>
