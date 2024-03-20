@@ -17,35 +17,57 @@
 - install nodemailer - npm i nodemailer - to send email
 - npm i --save-dev @types/nodemailer
 
-- install express-ejs-layouts - npm i express-ejs-layouts - to render html pages
-- install express-session - npm i express-session - to store session data in mongodb
-- install connect-mongo - npm i connect-mongo - to store session data in mongodb
-- install express-flash - npm i express-flash - to flash messages
-- install express-mongo-sanitize - npm i express-mongo-sanitize - to sanitize data
-- install helmet - npm i helmet - to secure http headers
-- install xss-clean - npm i xss-clean - to prevent xss attacks
-- install hpp - npm i hpp - to prevent http param pollution
-- install rate-limit - npm i express-rate-limit - to limit request from same api
-- install cors - npm i cors - to allow cross origin resource sharing
-- install cookie-parser - npm i cookie-parser - to parse cookies
-- install bcryptjs - npm i bcryptjs - to encrypt password
-- install jsonwebtoken - npm i jsonwebtoken - to generate token
-- install nodemailer-express-handlebars - npm i nodemailer-express-handlebars - to send email
-- install nodemailer-sendgrid-transport - npm i nodemailer-sendgrid-transport - to send email
-- install multer - npm i multer - to upload files
-- install sharp - npm i sharp - to resize images
-- install dotenv - npm i dotenv - to use environment variables
-- install morgan - npm i morgan - to log http requests
-    - check if user exists
-    - create user
-    - send email with token,
-    - ejs implementation
-    - forgot password
-    - reset password
-    - login
-    - logout
-    - update password
-    - update profile
-    - delete profile
 
-TODO: routes - folder structure 2: 27:54
+- password generator for access token m refreshToken
+https://www.lastpass.com/features/password-generator - to generate random password
+
+SUCCESS: Generate New Token , get user, social authentication
+
+jtw token must be provided - means - your token expired - this should only be hitted when user is logged in
+this is like professional authentication system that fb,outlook, teams etc other sites uses to secure session logout
+
+- social auth will be handled from frontend
+
+SUCCESS: update user info, password and avatar
+ - cloudinary - image hosting - 
+ base64 image  for cloudinary - 
+
+ ## authentication done - forgot password functionality left
+
+
+TODO:
+ ## COURSE - 2
+    - create course model : Design course database model ( schema )
+    - create course controller - create and edit course
+    - create course service
+    - create course route
+    - create course middleware
+    - create course validation
+    SUCCESS: above
+
+    SUCCESS: - below
+    GET Single & All courses - without purchase
+     - since redis is serverless - we're maintaining data in cache (redis) - if once visited - then it will be stored in cache - so that next time it will be fetched from cache
+        - if not visited - then it will be fetched from database and stored in cache
+        - if visited - then it will be fetched from cache
+
+
+SUCCESS:
+    - get course content, get user accessible all courses - only for valid user
+
+SUCCESS:
+   - add questions to course array, and answers to question array
+   - add reviews in course
+
+   git remote set-url origin git@github.com:AnishMandal939/mern_lms_advance.git   - to push for personal github repo using ssh
+   git push origin branch_name - to push to github repo
+
+SUCCESS: add review and reply in course
+
+- SUCCESS: 
+   - design order model and notification model: done
+
+- TODO: 
+   - create order controller - create and edit order
+      - create order done
+      - TODO: get and update notification status
