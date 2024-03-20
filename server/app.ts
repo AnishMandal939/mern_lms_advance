@@ -6,6 +6,8 @@ import cookieParser from 'cookie-parser';
 import { ErrorMiddleware } from './middleware/error';
 import userRouter from './routes/user.route';
 import courseRouter from './routes/course.route';
+import orderRouter from './routes/order.route';
+
 
 // make bodyParser available globally
 app.use(express.json({ limit: '50mb' })); // for parsing application/json (limit to 50mb) , cloudinary images are base64 encoded
@@ -18,10 +20,7 @@ app.use(cors({ credentials: true, origin: process.env.ORIGIN }));
 
 
 // router ===========================
-app.use('/api/v1', userRouter);
-
-app.use('/api/v1', courseRouter);
-
+app.use('/api/v1', userRouter, courseRouter, orderRouter);
 
 // routes ===========================
 
