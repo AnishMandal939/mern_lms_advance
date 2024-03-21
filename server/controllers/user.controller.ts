@@ -9,7 +9,7 @@ import path from "path";
 import sendMail from "../utils/sendMail";
 import { accessTokenOptions, refreshTokenOptions, sendToken } from "../utils/jwt";
 import { redis } from "../utils/redis";
-import { getAllUsersService, getUserById } from "../services/user.service";
+import { getAllUsersService, getUserById, updateUserRoleService } from "../services/user.service";
 import { v2 as cloudinary } from "cloudinary";
 // register user
 
@@ -405,6 +405,16 @@ export const getAllUsers = CatchAsyncError(async (req: Request, res: Response, n
         getAllUsersService(res);
     } catch (error: any) {
         return next(new ErrorHandler(error.message, 400));
+    }
+});
+
+// update user role -- only admin can access this route
+export const updateUserRole = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const {id, role} = req.body;
+        updateUserRoleService(id, role, res);
+    } catch (error: any) {
+        return next(new ErrorHandler(error.message, 400));       
     }
 });
 

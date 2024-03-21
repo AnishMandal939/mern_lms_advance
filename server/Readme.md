@@ -78,5 +78,8 @@ SUCCESS: add review and reply in course
       npm i @types/node-cron -D
       [node cron link](https://www.npmjs.com/package/node-cron)
 
-- PROGRESS: 
+- DONE: 
    - get all users, orders, courses
+
+   - update user role: PROGRESS:
+   

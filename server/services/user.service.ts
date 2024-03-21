@@ -38,3 +38,20 @@ export const getAllUsersService = async(res: Response) => {
         users
     });
 }
+
+// update user role -- only for admin
+export const updateUserRoleService = async(id: string, role: string, res: Response) => {
+    const user = await userModel.findByIdAndUpdate(id, {role}, {new: true}); // from mongodb
+    if(!user){
+        return res.status(404).json({
+            success: false,
+            message: "User not found"
+        });
+    }
+    user.role = role;
+    await user.save();
+    res.status(201).json({
+        success: true,
+        user
+    });
+}
