@@ -70,4 +70,5 @@ SUCCESS: add review and reply in course
 - TODO: 
    - create order controller - create and edit order
       - create order done
-      - TODO: get and update notification status
+      - : get and update notification status - done
+      - : delete notification with cronjob: TODO: this will delete notification after 1 month of interval if notification is read 

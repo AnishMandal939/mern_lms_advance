@@ -9,6 +9,7 @@ import mongoose from "mongoose";
 import ejs from "ejs";
 import path from "path";
 import sendMail from "../utils/sendMail";
+import NotificationModel from "../models/notificationModel";
 
 
 // upload course
@@ -74,7 +75,7 @@ export const getSingleCourse = CatchAsyncError(async (req: Request, res: Respons
         // receive data - for caching
         const courseId = req.params.id;
         const isCacheExist: any = await redis.get(courseId);
-        console.log("hitting redis", isCacheExist); // this will show you all data of course - if exist in cache
+        // console.log("hitting redis", isCacheExist); // this will show you all data of course - if exist in cache
 
 
         if (isCacheExist) {
@@ -86,8 +87,9 @@ export const getSingleCourse = CatchAsyncError(async (req: Request, res: Respons
         } else {
             // const course = await courseModel.findById(req.params.id); // this provides you all data of course , to secure data use select method
             const course = await courseModel.findById(req.params.id).select("-courseData.videoUrl -courseData.suggestion -courseData.questions -courseData.links"); // this provides you all data of course , to secure data use select method
-            console.log("hitting mongodb", course); // this will show you all data of course
+            // console.log("hitting mongodb", course); // this will show you all data of course
             // caching to handle multiple request for same course - without purchasing
+            const expirationInMilliseconds = 60 * 60 * 1000; // 1 hour
             await redis.set(courseId, JSON.stringify(course)); // set cache
             res.status(200).json({
                 success: true,
@@ -107,14 +109,14 @@ export const getAllCourses = CatchAsyncError(async (req: Request, res: Response,
         const isCacheExist: any = await redis.get("allCourses");
         if (isCacheExist) {
             const courses = JSON.parse(isCacheExist);
-            console.log("hitting redis");
+            // console.log("hitting redis");
             res.status(200).json({
                 success: true,
                 courses
             });
         } else {
             const courses = await courseModel.find().select("-courseData.videoUrl -courseData.suggestion -courseData.questions -courseData.links"); // this provides you all data of course , to secure data use select method
-            console.log("hitting mongo");
+            // console.log("hitting mongo");
             await redis.set("allCourses", JSON.stringify(courses)); // set cache
             res.status(200).json({
                 success: true,
@@ -134,7 +136,7 @@ export const getCourseByUser = CatchAsyncError(async (req: Request, res: Respons
         const userCourseList = req.user?.courses;
         const courseId = req.params.id;
         // check if user has purchased this course
-        const courseExist = userCourseList?.find((course: any) => course._id.toString() === courseId.toString());
+        const courseExist = userCourseList?.find((course: any) => course._id.toString() === courseId);
         if (!courseExist) {
             return next(new ErrorHandler("You have not purchased/ eligible to this course", 400));
         }
@@ -144,7 +146,7 @@ export const getCourseByUser = CatchAsyncError(async (req: Request, res: Respons
         const content = course?.courseData;
         res.status(200).json({
             success: true,
-            course, content
+            content
         });
 
     } catch (error: any) {
@@ -183,6 +185,13 @@ export const addQuestion = CatchAsyncError(async (req: Request, res: Response, n
 
         // add these question in course content
         courseContent.questions.push(newQuestion);
+
+        // notification added for admin if new question added
+        await NotificationModel.create({
+            user: req.user?._id,
+            title: "New Question Received",
+            message: `You have a new question from ${courseContent?.title}`
+        });
 
         // save course
         await course?.save();
@@ -237,6 +246,11 @@ export const addAnswer = CatchAsyncError(async (req: Request, res: Response, nex
         await course?.save();
         if (req.user?._id === question.user._id) {
             //create reply notification here
+            await NotificationModel.create({
+                user: req.user?._id,
+                title: "New Answer Received",
+                message: `You have a new answer in ${courseContent?.title}`
+            });
         } else {
             // send email
             const data = {
