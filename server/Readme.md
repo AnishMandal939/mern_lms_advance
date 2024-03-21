@@ -72,3 +72,8 @@ SUCCESS: add review and reply in course
       - create order done
       - : get and update notification status - done
       - : delete notification with cronjob: TODO: this will delete notification after 1 month of interval if notification is read 
+
+      package: for cron job
+      npm install --save node-cron
+      npm i @types/node-cron -D
+      [node cron link](https://www.npmjs.com/package/node-cron)
