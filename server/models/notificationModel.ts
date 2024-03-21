@@ -1,4 +1,4 @@
-import mongoose, {Document, Model, Schema} from "mongoose";
+import mongoose, { Document, Model, Schema } from "mongoose";
 
 export interface INotification extends Document {
     title: string;
@@ -6,7 +6,6 @@ export interface INotification extends Document {
     status: string;
     userId: string;
 }
-
 const notificationSchema = new Schema<INotification>({
     title: {
         type: String,
