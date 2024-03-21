@@ -1,7 +1,7 @@
 import express from "express";
 import { activateUser, getUserInfo, loginUser, logoutUser, registrationUser, socialAuth, updateAccessToken, updateAvatar, updatePassword, updateUserInfo } from "../controllers/user.controller";
 import { authorizeRoles, isAuthenticated } from "../middleware/auth";
-import { addAnswer, addQuestion, addReview, editCourse, getAllCourse, getAllCourses, getCourseByUser, getSingleCourse, replyToReview, uploadCourse } from "../controllers/course.controller";
+import { addAnswer, addQuestion, addReview, deleteCourse, editCourse, getAllCourse, getAllCourses, getCourseByUser, getSingleCourse, replyToReview, uploadCourse } from "../controllers/course.controller";
 
 // router
 const courseRouter = express.Router();
@@ -20,7 +20,8 @@ courseRouter.put("/add-reply",isAuthenticated, authorizeRoles("admin"), replyToR
 
 
 courseRouter.get("/get-courses",isAuthenticated, authorizeRoles("admin"), getAllCourse);
-
+// delete course
+courseRouter.delete("/delete-course/:id", isAuthenticated, authorizeRoles("admin"), deleteCourse);
 
 
 

@@ -411,10 +411,10 @@ export const getAllUsers = CatchAsyncError(async (req: Request, res: Response, n
 // update user role -- only admin can access this route
 export const updateUserRole = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const {id, role} = req.body;
+        const { id, role } = req.body;
         updateUserRoleService(id, role, res);
     } catch (error: any) {
-        return next(new ErrorHandler(error.message, 400));       
+        return next(new ErrorHandler(error.message, 400));
     }
 });
 
@@ -426,14 +426,14 @@ export const forgotPassword = CatchAsyncError(async (req: Request, res: Response
     try {
         // TODO: send email to user with reset password link
     } catch (error: any) {
-        return next(new ErrorHandler(error.message, 400));   
+        return next(new ErrorHandler(error.message, 400));
     }
 });
 
 // reset password  -- user
 export const resetPassword = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
     try {
-    //    TODO:  
+        //    TODO:  
     } catch (error: any) {
         return next(new ErrorHandler(error.message, 400));
     }
@@ -442,7 +442,24 @@ export const resetPassword = CatchAsyncError(async (req: Request, res: Response,
 // delete user -- admin
 export const deleteUser = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
     try {
-        // TODO: delete user
+        const { id } = req.params;
+
+        const user = await userModel.findById(id);
+        if (!user) {
+            return next(new ErrorHandler("User not found", 404));
+        }
+        // remove avatar from cloudinary
+        if (user.avatar?.public_id) {
+            await cloudinary.uploader.destroy(user.avatar.public_id);
+        }
+        await user.deleteOne({ id });
+        // delete fron redis
+        await redis.del(id);
+        res.status(200).json({
+            success: true,
+            message: "User deleted successfully"
+        });
+
     } catch (error: any) {
         return next(new ErrorHandler(error.message, 400));
     }

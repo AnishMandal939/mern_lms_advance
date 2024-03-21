@@ -81,5 +81,5 @@ SUCCESS: add review and reply in course
 - DONE: 
    - get all users, orders, courses
 
-   - update user role: PROGRESS:
-   
+   - update user role: SUCCESS:
+   - delete user and courses: PROGRESS:

@@ -1,5 +1,5 @@
 import express from "express";
-import { activateUser, getUserInfo, loginUser, logoutUser, registrationUser, socialAuth, updateAccessToken, updateAvatar, updatePassword, updateUserInfo, updateUserRole } from "../controllers/user.controller";
+import { activateUser, deleteUser, getUserInfo, loginUser, logoutUser, registrationUser, socialAuth, updateAccessToken, updateAvatar, updatePassword, updateUserInfo, updateUserRole } from "../controllers/user.controller";
 import { authorizeRoles, isAuthenticated } from "../middleware/auth";
 import { getAllUsers } from "../controllers/user.controller";
 
@@ -27,6 +27,7 @@ userRouter.put("/update-user-avatar",isAuthenticated, updateAvatar);
 // get all usrs
 userRouter.get("/get-users", isAuthenticated, authorizeRoles("admin"), getAllUsers);
 userRouter.put("/update-user", isAuthenticated, authorizeRoles("admin"), updateUserRole);
+userRouter.delete("/delete-user/:id", isAuthenticated, authorizeRoles("admin"), deleteUser);
 
 
 
