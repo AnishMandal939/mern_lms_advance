@@ -1,6 +1,7 @@
 import { Response } from "express";
 // import userModel from "../models/user.model"
 import { redis } from "../utils/redis";
+import userModel from "../models/user.model";
 
 // get user id
 export const getUserById = async(id: string, res: Response) => {
@@ -20,3 +21,20 @@ export const getUserById = async(id: string, res: Response) => {
         });
     }
 };
+
+// get all users -- only admin can access this route
+export const getAllUsersService = async(res: Response) => {
+    const users = await userModel.find().sort({createdAt: -1}); // from mongodb
+    // const usersJson = await redis.get("users"); // from redis - since we store users in redis after fetching from mongodb
+    // if(users){
+    //     const user = JSON.parse(users as any);
+    //     res.status(201).json({
+    //         success: true,
+    //         user
+    //     });
+    // }
+    res.status(201).json({
+        success: true,
+        users
+    });
+}

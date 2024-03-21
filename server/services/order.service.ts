@@ -11,3 +11,12 @@ export const newOrder = CatchAsyncError(async (data: any, res: Response, next: N
     });
     
 });
+
+// get all orders -- only admin can access this route
+export const getAllOrderService = async(res: Response) => {
+    const courses = await OrderModel.find().sort({createdAt: -1}); // from mongodb
+    res.status(201).json({
+        success: true,
+        courses
+    });
+}

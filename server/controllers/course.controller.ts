@@ -10,6 +10,7 @@ import ejs from "ejs";
 import path from "path";
 import sendMail from "../utils/sendMail";
 import NotificationModel from "../models/notificationModel";
+import { getAllCoursesService } from "../services/course.service";
 
 
 // upload course
@@ -395,3 +396,12 @@ export const replyToReview = CatchAsyncError(async (req: Request, res: Response,
         return next(new ErrorHandler(error.message, 500))
     }
 })
+
+// ge all courses - admin only
+export const getAllCourse = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        getAllCoursesService(res);
+    } catch (error: any) {
+        return next(new ErrorHandler(error.message, 400));
+    }
+});
