@@ -82,4 +82,6 @@ SUCCESS: add review and reply in course
    - get all users, orders, courses
 
    - update user role: SUCCESS:
-   - delete user and courses: PROGRESS:
+   - delete user and courses: SUCCESS:
+   - admin dashboard analytics : PROGRESS: 
+      - get the last 38 day's users,orders, notifications for the last year
