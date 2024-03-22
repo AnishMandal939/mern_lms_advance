@@ -87,4 +87,5 @@ SUCCESS: add review and reply in course
       - get the last 38 day's users,orders, notifications for the last year
    
    - Layout model design: SUCCESS:
-      - Create FAQ Hero, Categories PROGRESS:
+      - Create FAQ Hero, Categories SUCCESS:
+      - edit FAQ Hero, Categories PROGRESS:
