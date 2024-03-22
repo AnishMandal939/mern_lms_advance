@@ -90,8 +90,8 @@ export const getSingleCourse = CatchAsyncError(async (req: Request, res: Respons
             const course = await courseModel.findById(req.params.id).select("-courseData.videoUrl -courseData.suggestion -courseData.questions -courseData.links"); // this provides you all data of course , to secure data use select method
             // console.log("hitting mongodb", course); // this will show you all data of course
             // caching to handle multiple request for same course - without purchasing
-            const expirationInMilliseconds = 60 * 60 * 1000; // 1 hour
-            await redis.set(courseId, JSON.stringify(course)); // set cache
+            // const expirationInMilliseconds = 60 * 60 * 1000; // 1 hour
+            await redis.set(courseId, JSON.stringify(course), 'EX', 604800); // set cache and 7day expire
             res.status(200).json({
                 success: true,
                 course

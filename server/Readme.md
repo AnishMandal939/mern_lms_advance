@@ -88,4 +88,7 @@ SUCCESS: add review and reply in course
    
    - Layout model design: SUCCESS:
       - Create FAQ Hero, Categories SUCCESS:
-      - edit FAQ Hero, Categories PROGRESS:
+      - edit FAQ Hero, Categories SUCCESS:
+
+   - Advanced Cache Maintenance : PROGRESS:
+      - we're using redis for Cache maintenance, redis can also go down / slow if more data show now we'll be maintaining cache for larger data , we'll be using upstash redis for if user is no longer active for 1 month then we'll delete the cache data for that user  , course details

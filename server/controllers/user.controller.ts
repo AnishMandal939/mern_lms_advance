@@ -199,7 +199,7 @@ export const updateAccessToken = CatchAsyncError(async (req: Request, res: Respo
         const session = await redis.get(decoded.id as string);
 
         if (!session) {
-            return next(new ErrorHandler(message, 401));
+            return next(new ErrorHandler('Please login to access this resource', 401));
         };
 
         // create new access token
@@ -216,6 +216,9 @@ export const updateAccessToken = CatchAsyncError(async (req: Request, res: Respo
         // set cookies
         res.cookie("access_token", accessToken, accessTokenOptions);
         res.cookie("refresh_token", refreshToken, refreshTokenOptions);
+
+        // cache maintenance - 
+        await redis.set(user._id, JSON.stringify(user), "EX", 604800); // 7days in redis
 
         res.status(200).json({
             status: "success",
