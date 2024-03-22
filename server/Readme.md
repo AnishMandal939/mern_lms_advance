@@ -86,5 +86,5 @@ SUCCESS: add review and reply in course
    - admin dashboard analytics : SUCCESS: 
       - get the last 38 day's users,orders, notifications for the last year
    
-   - Layout model design: PROGRESS:
-      
+   - Layout model design: SUCCESS:
+      - Create FAQ Hero, Categories PROGRESS:
